@@ -1,4 +1,10 @@
 {
+  "printWidth": 100,
+  "tabWidth": 2,
+  "semi": false,
   "singleQuote": true,
-  "trailingComma": "all"
+  "disableLanguages": ["vue"],
+  "htmlWhitespaceSensitivity": "ignore",
+  "trailingComma":"none",
+  "endOfLine": "auto"
 }
