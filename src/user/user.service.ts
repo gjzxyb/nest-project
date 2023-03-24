@@ -1,36 +1,34 @@
-// src/user/user.service.ts
-
+// user.service.ts
 import { Injectable } from '@nestjs/common';
 import { User } from './user.entity';
-import { JwtService } from '@nestjs/jwt';
+import { UserResponse } from './user-response.interface';
 
 @Injectable()
 export class UserService {
-  private users: User[] = [];
-
-  constructor(private readonly jwtService: JwtService) {}
-
-  register(user: User): User {
-    user.id = Date.now();
-    this.users.push(user);
-    return user;
+  register(user: User): UserResponse {
+    // your logic here
+    return {
+      id: user.id,
+      username: user.username,
+      access_token: 'your_generated_token_here',
+    };
   }
 
-  login(username: string, password: string): { access_token: string } | null {
-    const user = this.users.find(
-      (u) => u.username === username && u.password === password,
-    );
-
-    if (!user) {
-      return null;
+  login(username: string, password: string): UserResponse | null {
+    // your logic here
+    const user = this.findUserByUsernameAndPassword(username, password);
+    if (user) {
+      return {
+        id: user.id,
+        username: user.username,
+        access_token: 'your_generated_token_here',
+      };
     }
-
-    const payload = { sub: user.id, username: user.username };
-    const access_token = this.jwtService.sign(payload);
-
-    return { access_token };
+    return null;
   }
-  async findOne(_id: string): Promise<User> {
-    return await this.userModel.findById(_id);
+
+  // Add a method to find a user by their username and password
+  findUserByUsernameAndPassword(username: string, password: string): User | null {
+    // your logic here
   }
 }
