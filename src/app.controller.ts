@@ -7,12 +7,15 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('register')
-  register(@Body() user: User): User {
-    return this.userService.register(user)
+  async register(@Body() user: User): Promise<User> {
+    return await this.userService.register(user)
   }
 
   @Post('login')
-  login(@Body('username') username: string, @Body('password') password: string): User | null {
-    return this.userService.login(username, password)
+  async login(
+    @Body('username') username: string,
+    @Body('password') password: string
+  ): Promise<{ access_token: string } | null> {
+    return await this.userService.login(username, password)
   }
 }

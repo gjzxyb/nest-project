@@ -1,7 +1,16 @@
-// src/user/user.entity.ts
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 
+@Entity()
 export class User {
+  @PrimaryGeneratedColumn({ name: 'stuid' })
   id: number
-  username: string
+
+  @Column({ name: 'name' })
+  name: string
+
+  @Column({ name: 'kaojihao' })
+  kaojihao: string
+
+  @Column({ name: 'password' })
   password: string
 }

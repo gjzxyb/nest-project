@@ -1,5 +1,3 @@
-// src/auth/auth.controller.ts
-
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { User } from '../user/user.entity';
@@ -9,13 +7,12 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
-  register(@Body() user: User): User {
-    return this.authService.register(user);
+  async register(@Body() user: User): Promise<User> {
+    return await this.authService.register(user);
   }
 
   @Post('login')
-  login(@Body('username') username: string, @Body('password') password: string): { access_token: string } | null {
-    return this.authService.login(username, password);
+  async login(@Body('username') username: string, @Body('password') password: string): Promise<{ access_token: string } | null> {
+    return await this.authService.login(username, password);
   }
 }
-
