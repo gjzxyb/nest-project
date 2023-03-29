@@ -41,12 +41,13 @@ export class UserService {
     // 实际上，您可能需要将密码存储为哈希值，并在此处进行哈希比较
     if (user && user.password === password) {
       // 根据您的身份验证策略生成 access_token，例如，使用 JWT
-      const access_token = 'your_generated_access_token' // 用实际的 JWT token 替换
+      const access_token = 'adminiiiiiii' // 用实际的 JWT token 替换
       return { access_token }
     } else {
       return null
     }
   }
+
   async findById(id: number): Promise<User | undefined> {
     return await this.userRepository.findOne({ where: { id } })
   }

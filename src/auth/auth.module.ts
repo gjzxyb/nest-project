@@ -6,14 +6,20 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { User } from '../user/user.entity'
 import { PassportModule } from '@nestjs/passport'
 import { JwtStrategy } from './jwt.strategy'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
     PassportModule,
-    JwtModule.register({
-      secret: 'your_jwt_secret', // 使用一个安全的密钥
-      signOptions: { expiresIn: '1h' }
+    ConfigModule.forRoot(),
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+        signOptions: { expiresIn: '1h' }
+      })
     })
   ],
   providers: [UserService, JwtStrategy],
