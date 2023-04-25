@@ -167,7 +167,7 @@ module.exports = {
     'object-shorthand': 0, // 强制对象字面量缩写语法
     'one-var': 0, // 连续声明
     'operator-assignment': [0, 'always'], // 赋值运算符 += -=什么的
-    'operator-linebreak': [2, 'after'], // 换行时运算符在行尾还是行首
+    'operator-linebreak': [0, 'after'], // 换行时运算符在行尾还是行首
     'padded-blocks': 0, // 块语句内行首行尾是否要空行
     'prefer-const': 0, // 首选const
     'prefer-spread': 0, // 首选展开运算
